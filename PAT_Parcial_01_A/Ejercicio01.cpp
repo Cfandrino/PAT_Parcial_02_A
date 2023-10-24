@@ -1,17 +1,22 @@
-#include "ejercicio01.h"
-#include <iostream>
+#include "Ejercicio01.h"
 
-Node::Node(char val) : value(val), next(nullptr) {}
+template<typename T>
+Node<T>* removeNodes(Node<T>* head, T value) {
+    while (head != nullptr && head->value == value) {
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
+    }
 
-Node* removeNodesWithValue(Node* head, char value) {
-    Node* dummy = new Node(' ');
-    dummy->next = head;
-    Node* current = dummy;
+    if (head == nullptr) {
+        return nullptr;
+    }
 
+    Node<T>* current = head;
     while (current->next != nullptr) {
         if (current->next->value == value) {
-            Node* temp = current->next;
-            current->next = current->next->next;
+            Node<T>* temp = current->next;
+            current->next = temp->next;
             delete temp;
         }
         else {
@@ -19,17 +24,5 @@ Node* removeNodesWithValue(Node* head, char value) {
         }
     }
 
-    Node* newHead = dummy->next;
-    delete dummy;
-
-    return newHead;
-}
-
-void printList(Node* head) {
-    Node* current = head;
-    while (current != nullptr) {
-        std::cout << current->value << " -> ";
-        current = current->next;
-    }
-    std::cout << "nullptr" << std::endl;
+    return head;
 }

@@ -4,9 +4,6 @@
 #include "Ejercicio03.h"
 #include "Node.h"
 
-
-
-// Implementación simple de countStudentsUnableToEat
 int countStudentsUnableToEat(std::vector<char>& students, std::vector<char>& sandwiches) {
     int unableToEat = 0;
 
@@ -30,16 +27,31 @@ int countStudentsUnableToEat(std::vector<char>& students, std::vector<char>& san
 }
 
 int main() {
-    // ... Código anterior ...
+    // Ejemplo para el Ejercicio 1 (eliminación de nodos en una lista enlazada)
+    Node<char>* head1 = new Node<char>('a');
+    head1->next = new Node<char>('b');
+    head1->next->next = new Node<char>('f');
+    head1->next->next->next = new Node<char>('c');
+    head1->next->next->next->next = new Node<char>('d');
+    head1->next->next->next->next->next = new Node<char>('e');
+    head1->next->next->next->next->next->next = new Node<char>('f');
 
-    // Ejemplo para el Ejercicio 2 (estudiantes y sandwiches)
-    std::vector<char> students = { 'V', 'R', 'V', 'C', 'C', 'C', 'V', 'V', 'V', 'V', 'V' };
-    std::vector<char> sandwiches = { 'R', 'C', 'R', 'V', 'R', 'C', 'R', 'V', 'C', 'R', 'C' };
+    char value1 = 'f';
+    Node<char>* newHead1 = removeNodes(head1, value1);
 
-    int unableToEat = countStudentsUnableToEat(students, sandwiches);
-    std::cout << "Ejercicio 2: Estudiantes que no pueden comer: " << unableToEat << std::endl;
+    std::cout << "Ejercicio 1: Lista resultante después de eliminar nodos: ";
+    Node<char>* current1 = newHead1;
+    while (current1 != nullptr) {
+        std::cout << current1->value << " -> ";
+        current1 = current1->next;
+    }
+    std::cout << "nullptr" << std::endl;
 
-    // ... Código posterior ...
+    // Resto del código para los Ejercicios 2 y 3
+    // ...
+
+    // Liberar memoria
+    delete newHead1; // Libera la memoria de la lista enlazada
 
     return 0;
 }
