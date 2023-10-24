@@ -2,40 +2,9 @@
 #include "Ejercicio01.h"
 #include "Ejercicio02.h"
 #include "Ejercicio03.h"
+#include "Node.h"
 
-template<typename T>
-struct Node {
-    T value;
-    Node* next;
-    Node(T val) : value(val), next(nullptr) {}
-};
 
-template <typename T>
-Node<T>* removeNodes(Node<T>* head, T value) {
-    while (head != nullptr && head->value == value) {
-        Node<T>* temp = head;
-        head = head->next;
-        delete temp;
-    }
-
-    if (head == nullptr) {
-        return nullptr;
-    }
-
-    Node<T>* current = head;
-    while (current->next != nullptr) {
-        if (current->next->value == value) {
-            Node<T>* temp = current->next;
-            current->next = temp->next;
-            delete temp;
-        }
-        else {
-            current = current->next;
-        }
-    }
-
-    return head;
-}
 
 // Implementación simple de countStudentsUnableToEat
 int countStudentsUnableToEat(std::vector<char>& students, std::vector<char>& sandwiches) {
