@@ -1,10 +1,15 @@
-#pragma once
+#ifndef EJERCICIO01_H
+#define EJERCICIO01_H
 
-#include "Node.h"
+struct Node {
+    char value;
+    Node* next;
 
-class Ejercicio01
-{
-public:
-	Node<char>* remove(Node<char>* head, char value);
+    Node(char val);
 };
 
+Node* removeNodesWithValue(Node* head, char value);
+
+void printList(Node* head);
+
+#endif 

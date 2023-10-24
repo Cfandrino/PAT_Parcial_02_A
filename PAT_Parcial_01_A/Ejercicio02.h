@@ -1,12 +1,16 @@
-#pragma once
+#ifndef EJERCICIO02_H
+#define EJERCICIO02_H
 
 #include <vector>
 
-using std::vector;
-
-class Ejercicio02
-{
+class SandwichQueue {
 public:
-	int countStudents(vector<char>* students, vector<char>* sandwiches);
+    SandwichQueue(const std::vector<char>& students, const std::vector<char>& sandwiches);
+    int countStudentsNotEaten();
+
+private:
+    std::vector<char> students;
+    std::vector<char> sandwiches;
 };
 
+#endif // EJERCICIO02_H

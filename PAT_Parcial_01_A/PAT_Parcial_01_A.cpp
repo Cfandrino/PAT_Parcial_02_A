@@ -1,20 +1,76 @@
-// PAT_Parcial_01_A.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include "Ejercicio01.h"
+#include "Ejercicio02.h"
+#include "Ejercicio03.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+template<typename T>
+struct Node {
+    T value;
+    Node* next;
+    Node(T val) : value(val), next(nullptr) {}
+};
+
+template <typename T>
+Node<T>* removeNodes(Node<T>* head, T value) {
+    while (head != nullptr && head->value == value) {
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    if (head == nullptr) {
+        return nullptr;
+    }
+
+    Node<T>* current = head;
+    while (current->next != nullptr) {
+        if (current->next->value == value) {
+            Node<T>* temp = current->next;
+            current->next = temp->next;
+            delete temp;
+        }
+        else {
+            current = current->next;
+        }
+    }
+
+    return head;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+// Implementación simple de countStudentsUnableToEat
+int countStudentsUnableToEat(std::vector<char>& students, std::vector<char>& sandwiches) {
+    int unableToEat = 0;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    while (!students.empty() && !sandwiches.empty()) {
+        char studentPreference = students[0];
+        char sandwichType = sandwiches[0];
+
+        if (studentPreference == sandwichType) {
+            students.erase(students.begin());
+            sandwiches.erase(sandwiches.begin());
+        }
+        else {
+            students.push_back(studentPreference);
+            students.erase(students.begin());
+        }
+    }
+
+    unableToEat = students.size();
+
+    return unableToEat;
+}
+
+int main() {
+    // ... Código anterior ...
+
+    // Ejemplo para el Ejercicio 2 (estudiantes y sandwiches)
+    std::vector<char> students = { 'V', 'R', 'V', 'C', 'C', 'C', 'V', 'V', 'V', 'V', 'V' };
+    std::vector<char> sandwiches = { 'R', 'C', 'R', 'V', 'R', 'C', 'R', 'V', 'C', 'R', 'C' };
+
+    int unableToEat = countStudentsUnableToEat(students, sandwiches);
+    std::cout << "Ejercicio 2: Estudiantes que no pueden comer: " << unableToEat << std::endl;
+
+    // ... Código posterior ...
+
+    return 0;
+}
